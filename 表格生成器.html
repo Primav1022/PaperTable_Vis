@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Analogy Design Research Table (41 Papers)</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            margin: 0;
+            padding: 15px;
+            background: white;
+            font-size: 12px;
+        }
+        
+        .controls-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+        
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+        }
+        
+        .academic-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .academic-table th {
+            padding: 8px 4px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 8px;
+            border: 1px solid rgba(255,255,255,0.3);
+            line-height: 1.2;
+        }
+        
+        .academic-table td {
+            padding: 5px 3px;
+            text-align: center;
+            font-size: 7px;
+            border: 1px solid #dee2e6;
+            vertical-align: middle;
+            line-height: 1.1;
+        }
+        
+        /* 表头颜色方案 */
+        .header-basic { background: linear-gradient(135deg, #34495e, #2c3e50); }
+        .header-analogy { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .header-create { background: linear-gradient(135deg, #27ae60, #229954); }
+        .header-representation { background: linear-gradient(135deg, #3498db, #2980b9); }
+        
+        /* 数据单元格样式 */
+        .paper-num { 
+            background: #ecf0f1; 
+            font-weight: bold; 
+            width: 25px; 
+            font-size: 8px;
+        }
+        
+        .title-col { 
+            background: #ecf0f1; 
+            text-align: left !important; 
+            max-width: 140px; 
+            font-weight: bold; 
+            font-size: 7px; 
+            padding-left: 6px;
+            line-height: 1.2;
+        }
+        
+        .venue-col { 
+            background: #fff3cd; 
+            width: 35px; 
+            font-size: 7px;
+        }
+        
+        .year-col { 
+            background: #d1ecf1; 
+            width: 32px; 
+            font-size: 7px;
+        }
+        
+        .auto-col { 
+            background: #e2e3e5; 
+            width: 40px; 
+            font-size: 6px;
+        }
+        
+        .domain-col { 
+            background: #f8f9fa; 
+            text-align: left !important; 
+            max-width: 65px; 
+            font-size: 6px;
+            padding-left: 4px;
+            line-height: 1.2;
+        }
+        
+        /* 支持状态样式 */
+        .supported { 
+            background: #d4edda !important; 
+            color: #155724; 
+            font-weight: bold; 
+            font-size: 10px;
+        }
+        
+        .not-supported { 
+            background: #f8d7da !important; 
+            color: #721c24; 
+            font-size: 8px;
+        }
+        
+        /* 过程列宽度 */
+        .process-col {
+            width: 18px;
+            min-width: 18px;
+        }
+        
+        /* 行交替颜色 */
+        .academic-table tbody tr:nth-child(even) td:not(.supported):not(.not-supported) {
+            background-color: rgba(248, 249, 250, 0.5);
+        }
+        
+        /* 图例样式 - 放在表格下方 */
+        .legend-container {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #dee2e6;
+            margin-top: 20px;
+        }
+        
+        .legend-title {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 18px;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
+        }
+        
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 18px;
+        }
+        
+        .legend-card {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            border-left: 4px solid #3498db;
+        }
+        
+        .legend-card h4 {
+            margin: 0 0 12px 0;
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .legend-card ul {
+            margin: 0;
+            padding-left: 16px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .legend-card li {
+            margin-bottom: 6px;
+        }
+        
+        .color-indicator {
+            display: inline-block;
+            width: 18px;
+            height: 14px;
+            margin-right: 8px;
+            border-radius: 3px;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+        }
+        
+        /* 表格标题 */
+        .table-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: linear-gradient(135deg, #ecf0f1, #bdc3c7);
+            border-radius: 8px;
+        }
+        
+        .stats-info {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: #e8f5e8;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        /* 响应式调整 */
+        @media print {
+            .controls-header, .controls { display: none; }
+            body { font-size: 10px; }
+            .academic-table { font-size: 8px; }
+            .academic-table th { font-size: 7px; }
+            .academic-table td { font-size: 6px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls-header">
+        <h1>📊 完整41篇论文表格生成器</h1>
+        <p>Complete Analogy-based Design Research Analysis (All 41 Papers)</p>
+    </div>
+    
+    <div class="controls">
+        <button class="btn btn-success" onclick="downloadImage()">📷 下载PNG图片</button>
+        <button class="btn btn-warning" onclick="downloadSVG()">🎨 下载SVG矢量图</button>
+        <button class="btn" onclick="generatePythonImage('publication')">📄 生成发表级图片</button>
+        <button class="btn" onclick="generatePythonImage('presentation')">📺 生成演示级图片</button>
+        <button class="btn" onclick="copyHTML()">📋 复制HTML代码</button>
+        <button class="btn" onclick="window.print()">🖨️ 打印/保存PDF</button>
+    </div>
+    
+    <div class="stats-info" id="statsInfo">
+        📈 数据统计: 正在加载论文数据...
+    </div>
+    
+    <div class="table-title">
+        Analogy-based Design Research Analysis (Complete Dataset: 41 Papers)
+    </div>
+    
+    <div class="table-container" id="tableContainer">
+        <table class="academic-table" id="mainTable">
+            <thead>
+                <tr>
+                    <th rowspan="2" class="header-basic">#</th>
+                    <th rowspan="2" class="header-basic">Paper Title</th>
+                    <th rowspan="2" class="header-basic">Venue</th>
+                    <th rowspan="2" class="header-basic">Year</th>
+                    <th colspan="4" class="header-analogy">Analogy Process</th>
+                    <th colspan="7" class="header-create">Create Process</th>
+                    <th colspan="6" class="header-representation">Representation</th>
+                    <th rowspan="2" class="header-basic">Auto<br>Level</th>
+                    <th rowspan="2" class="header-basic">Domain</th>
+                </tr>
+                <tr>
+                    <th class="header-analogy process-col">Enc</th>
+                    <th class="header-analogy process-col">Ret</th>
+                    <th class="header-analogy process-col">Map</th>
+                    <th class="header-analogy process-col">Eva</th>
+                    <th class="header-create process-col">Vis</th>
+                    <th class="header-create process-col">Ins</th>
+                    <th class="header-create process-col">Ide</th>
+                    <th class="header-create process-col">Pro</th>
+                    <th class="header-create process-col">Fab</th>
+                    <th class="header-create process-col">Eva</th>
+                    <th class="header-create process-col">Met</th>
+                    <th class="header-representation process-col">Txt</th>
+                    <th class="header-representation process-col">Vis</th>
+                    <th class="header-representation process-col">Str</th>
+                    <th class="header-representation process-col">Fun</th>
+                    <th class="header-representation process-col">Wor</th>
+                    <th class="header-representation process-col">Unc</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- 数据将通过JavaScript生成 -->
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 图例放在表格下方 -->
+    <div class="legend-container">
+        <div class="legend-title">📚 图例说明与缩写对照 (Legend & Abbreviations)</div>
+        <div class="legend-grid">
+            <div class="legend-card">
+                <h4>🔄 Analogy Process (类比过程)</h4>
+                <ul>
+                    <li><strong>Enc</strong> = Encoding/Representation (编码/表示)</li>
+                    <li><strong>Ret</strong> = Retrieval (检索)</li>
+                    <li><strong>Map</strong> = Mapping (映射)</li>
+                    <li><strong>Eva</strong> = Evaluation (评估)</li>
+                </ul>
+            </div>
+            
+            <div class="legend-card">
+                <h4>🛠️ Create Process (创作过程)</h4>
+                <ul>
+                    <li><strong>Vis</strong> = Vision (愿景)</li>
+                    <li><strong>Ins</strong> = Inspiration (灵感)</li>
+                    <li><strong>Ide</strong> = Ideation (构思)</li>
+                    <li><strong>Pro</strong> = Prototype (原型)</li>
+                    <li><strong>Fab</strong> = Fabrication (制作)</li>
+                    <li><strong>Eva</strong> = Evaluation (评估)</li>
+                    <li><strong>Met</strong> = Meta-cognition (元认知)</li>
+                </ul>
+            </div>
+            
+            <div class="legend-card">
+                <h4>📋 Representation (表示方式)</h4>
+                <ul>
+                    <li><strong>Txt</strong> = Text (文本)</li>
+                    <li><strong>Vis</strong> = Visual (视觉)</li>
+                    <li><strong>Str</strong> = Structure (结构)</li>
+                    <li><strong>Fun</strong> = Function (功能)</li>
+                    <li><strong>Wor</strong> = Workflow (工作流)</li>
+                    <li><strong>Unc</strong> = Unconventional (非常规)</li>
+                </ul>
+            </div>
+            
+            <div class="legend-card">
+                <h4>🎨 符号说明 (Symbol Explanation)</h4>
+                <ul>
+                    <li><span class="color-indicator" style="background: #d4edda;"></span><strong>✓</strong> = 支持该特性 (Feature Supported)</li>
+                    <li><span class="color-indicator" style="background: #f8d7da;"></span><strong>×</strong> = 不支持该特性 (Feature Not Supported)</li>
+                    <li><strong>Auto Level</strong> = 自动化级别 (Automation Level)</li>
+                    <li style="margin-left: 20px; font-size: 11px; color: #666;">• augment = 增强型 • assist = 辅助型 • automate = 自动化型</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 20px; font-size: 11px; color: #666;" id="footer">
+        Generated on <span id="currentDate"></span> | Total Papers: <span id="paperCount">41</span> | Data Source: paperprocess4vis.csv
+    </div>
+
+    <!-- html2canvas库用于生成图片 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        // 从API获取数据
+        let completeResearchData = [];
+        
+        async function fetchDataFromAPI() {
+            try {
+                const response = await fetch('/api/papers');
+                if (response.ok) {
+                    const data = await response.json();
+                    completeResearchData = data.map(paper => ({
+                        no: paper.no,
+                        title: paper.title,
+                        venue: paper.venue,
+                        year: paper.year,
+                        analogyProcess: paper.analogy_process,
+                        createProcess: paper.create_process,
+                        representation: paper.representation,
+                        automation: paper.automation,
+                        domain: paper.domain
+                    }));
+                    loadTableData();
+                    updateStats();
+                } else {
+                    console.error('API请求失败:', response.status);
+                    // 如果API不可用，使用默认数据
+                    loadDefaultData();
+                }
+            } catch (error) {
+                console.error('获取数据失败:', error);
+                // 如果API不可用，使用默认数据
+                loadDefaultData();
+            }
+        }
+        
+        function loadDefaultData() {
+            // 默认数据（当API不可用时使用）
+            completeResearchData = [
+                {no: 1, title: "Improving Selection of Analogical Inspirations through Chunking and Recombination", venue: "C&C", year: 2024, analogyProcess: ["√", "√", "", ""], createProcess: ["√", "√", "√", "", "", "", ""], representation: ["√", "", "", "", "", "√"], automation: "augment", domain: "产品设计"},
+                {no: 2, title: "BioSpark: Beyond Analogical Inspiration to LLM-augmented Transfer", venue: "CHI", year: 2025, analogyProcess: ["", "√", "√", ""], createProcess: ["", "√", "√", "√", "", "√", ""], representation: ["", "", "√", "√", "", ""], automation: "augment", domain: "生物启发式机械设计"}
+                // ... 可以添加更多默认数据
+            ];
+            loadTableData();
+            updateStats();
+        }
+        
+        function loadTableData() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            completeResearchData.forEach(paper => {
+                const row = document.createElement('tr');
+                
+                // 处理标题长度 - 更短以适应紧凑布局
+                const titleDisplay = paper.title.length > 20 ? 
+                    paper.title.substring(0, 17) + '...' : paper.title;
+                
+                // 处理领域显示长度
+                const domainDisplay = paper.domain.length > 8 ? 
+                    paper.domain.substring(0, 5) + '...' : paper.domain;
+                
+                row.innerHTML = `
+                    <td class="paper-num">${paper.no}</td>
+                    <td class="title-col" title="${paper.title}">${titleDisplay}</td>
+                    <td class="venue-col">${paper.venue}</td>
+                    <td class="year-col">${paper.year}</td>
+                    ${[...paper.analogyProcess, ...paper.createProcess, ...paper.representation].map(value => {
+                        const isSupported = value === '√';
+                        const cellClass = isSupported ? 'supported process-col' : 'not-supported process-col';
+                        const symbol = isSupported ? '✓' : '×';
+                        return `<td class="${cellClass}">${symbol}</td>`;
+                    }).join('')}
+                    <td class="auto-col">${paper.automation}</td>
+                    <td class="domain-col" title="${paper.domain}">${domainDisplay}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // 更新统计信息
+            updateStats();
+        }
+        
+        function updateStats() {
+            const venues = {};
+            const years = {};
+            const autoLevels = {};
+            
+            completeResearchData.forEach(paper => {
+                venues[paper.venue] = (venues[paper.venue] || 0) + 1;
+                years[paper.year] = (years[paper.year] || 0) + 1;
+                autoLevels[paper.automation] = (autoLevels[paper.automation] || 0) + 1;
+            });
+            
+            const topVenues = Object.entries(venues).sort((a, b) => b[1] - a[1]).slice(0, 3);
+            const topYears = Object.entries(years).sort((a, b) => b[1] - a[1]);
+            
+            document.getElementById('statsInfo').innerHTML = `
+                📈 数据统计: 总计 ${completeResearchData.length} 篇论文 | 
+                主要会议: ${topVenues.map(([v, c]) => `${v}(${c})`).join(', ')} | 
+                年份分布: ${topYears.map(([y, c]) => `${y}年(${c})`).join(', ')} |
+                自动化: ${Object.entries(autoLevels).map(([a, c]) => `${a}(${c})`).join(', ')}
+            `;
+            
+            document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('paperCount').textContent = completeResearchData.length;
+        }
+        
+        async function downloadImage() {
+            const element = document.body;
+            
+            try {
+                const canvas = await html2canvas(element, {
+                    width: 1600,
+                    height: 2400,
+                    scale: 2,
+                    backgroundColor: '#ffffff',
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false
+                });
+                
+                const link = document.createElement('a');
+                link.download = `analogy_design_complete_table_${Date.now()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+                alert('✅ 完整41篇论文表格PNG图片已下载！');
+                
+            } catch (error) {
+                console.error('生成图片失败:', error);
+                alert('❌ 图片生成失败，请重试或使用打印功能');
+            }
+        }
+        
+        function downloadSVG() {
+            alert('💡 SVG生成功能开发中，请使用PNG下载或打印功能');
+        }
+        
+        async function generatePythonImage(imageType) {
+            try {
+                const response = await fetch('/api/generate-image', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        type: imageType
+                    })
+                });
+                
+                if (response.ok) {
+                    // 创建下载链接
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `complete_41_papers_${imageType}.png`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                    
+                    alert(`✅ ${imageType === 'publication' ? '发表级' : '演示级'}图片已生成并下载！`);
+                } else {
+                    const errorData = await response.json();
+                    alert(`❌ 图片生成失败: ${errorData.error}`);
+                }
+            } catch (error) {
+                console.error('生成图片失败:', error);
+                alert('❌ 图片生成失败，请确保API服务器正在运行');
+            }
+        }
+        
+        function copyHTML() {
+            const htmlContent = document.documentElement.outerHTML;
+            
+            navigator.clipboard.writeText(htmlContent).then(() => {
+                alert('✅ 完整HTML代码已复制到剪贴板！');
+            }).catch(() => {
+                // 创建临时文本域
+                const textarea = document.createElement('textarea');
+                textarea.value = htmlContent;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('✅ HTML代码已复制到剪贴板！');
+            });
+        }
+        
+        // 页面加载时初始化数据
+        window.addEventListener('load', function() {
+            fetchDataFromAPI();
+        });
+    </script>
+</body>
+</html>
