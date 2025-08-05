@@ -1,0 +1,64 @@
+\section{introduction}
+
+In the era where foundational models can potentially standardize creativity, amplifying individual output while diminishing collective innovation\cite{doshi2024generative}, understanding, stimulating and applying individual creativity mechanisms is crucial \cite{kawakami2024impact, hitsuwari2023does, humlum2025large} to address this problem. The cognitive science community have extensively studied these mechanisms, encompassing specialized semantic processing\cite{kenett2023semantic}, associative thinking\cite{beaty2023associative}, divergent and convergent thought\cite{mccrae1987creativity}, metaphor and analogy\cite{holyoak1996mental}. In order to explore a pragmatic way of leveraging cognition mechanism in HCI, this work, we focused on Design-by-Analogy(DbA), a goal-oriented field that closely integrates individual cognition with practice, distinguished by its structured mapping nature which enabling qualitative and quantitative measurement\cite{mcadams2002quantitative}, offers a significant pathway for Combinational Creativity\cite{peng2025probing} measurement and stimulate.
+
+%在一个基础模型可能使创造力标准化的时代，放大了个人产出却削弱了集体创新【】，理解、激发和应用个体的创造机制至关重要。认知科学领域对创造性机制的有大量研究，涵盖特殊语义处理【】、联想思维【】、发散/聚合思维【】、隐喻和类比【】等。本文聚焦于类比设计（DbA），这一领域以目标为导向，紧密结合了个体的认知与实践，同时，其结构化映射的本质使该行为能够进行定性和定量测量，为组合创造力提供了一条重要途径。
+
+
+Design-by-Analogy(DbA) is a design methodology in which novel solutions, opportunities, or designs are generated within a target domain by drawing inspiration extracted from a source domain using specific mapping logic\cite{jiang2022data, fu2014bio, gentner1983structure}. DbA possesses a well-established research foundation within the engineering design field, dating back to the Structure-Mapping Theory in 1983\cite{gentner1983structure}. This initiated a series of computational analogy reasoning studies\cite{hofstadter1984copycat, hummel1997distributed, falkenhainer1989structure, thagard1990analog}. Around 2000, research gradually expanded to focus more explicitly on analogy design, establishing robust frameworks for quantitative assessment and standardized evaluation of DbA processes\cite{mcadams2002quantitative}. By approximately 2010, the emergence of research on wordtree based methods for patent database analysis sparked a renewed surge of interest in DbA\cite{linsey2012design, linsey2008increasing, verhaegen2011identifying}, leading to numerous studies\cite{fu2014bio, fu2015design, jiang2022data}. Researchers explored various methodological aspects of DbA, primarily concentrating on mechanical design\cite{jiang2022data}, bio-inspiration design\cite{fu2014bio} and patent based design\cite{verhaegen2011identifying} contexts. In the wild, DbA applications show the potential: wind turbine blades inspired by humpback whale tubercles by engineers\cite{fu2014bio}, foreign entrepreneurs migrated patents from local perfume manufacturers to innovate alcoholic beverage businesses\cite{andriani2025perfume} and etc.
+% %-------类比设计定义，类比设计历史，为何类比设计-------------
+%类比设计（DbA）是一种设计方法，通过从源领域汲取灵感，在目标领域中生成新颖的解决方案、机会或设计\cite{jiang2022data, fu2014bio}。DbA在工程设计领域拥有坚实的研究基础，其起源可追溯到1983年的结构映射理论\cite{gentner1983structure}。这引发了一系列关于计算类比推理的研究\cite{hofstadter1984copycat, hummel1997distributed, falkenhainer1989structure, thagard1990analog}。大约在2000年左右，研究逐渐扩展，更加明确地聚焦于类比设计，并为DbA流程建立了可靠的定量评估框架和标准化评价体系\cite{mcadams2002quantitative}。到2010年前后，基于词树的专利数据库分析方法的研究兴起，再次引发了对DbA的浓厚兴趣\cite{linsey2012design, linsey2008increasing, verhaegen2011identifying}，进而催生了众多研究\cite{fu2014bio, fu2015design, jiang2022data}。研究人员探索了DbA在方法学方面的各个层面，主要集中在机械设计\cite{jiang2022data}、生物启发设计\cite{fu2014bio}和基于专利的设计\cite{verhaegen2011identifying}等场景。已经投入工业使用的类比设计案例，如：工程设计师受座头鲸鲸鳍上凸起结节的启发设计出了更高效的风力涡轮机叶片, 外来企业家迁移当地专利开展创新业务等。
+
+
+
+Although the value of Design-by-Analogy (DbA) has been illustrated through numerous examples, our systematic literature review reveals that current research on DbA in both academia and industry remains fragmented. Existing reviews typically focus on specific perspectives, including DbA theory,\cite{song2018characterizing,linsey2008modality,linsey2008increasing}, data-driven approaches using narrow-scope sources\cite{jiang2022data,fu2014bio,}, applications of single computer technologies\cite{aamodt1994case, chakrabarti2011computer, ghane2024semantic, regenwetter2022deep}, and interaction-centered DbA methods.\cite{tseng2008role, marshall2016analogy, verhaegen2013refinements} Implicit in these works are several assumptions: that DbA is only applicable in the early ideation stage or limited to specific use cases; that it must be supported solely by structured data; and that its representational forms are inherently constrained. Furthermore, we observe a growing trend in the AI industry to compress the creative process into a simplified input–output model. This reductionist view tends to overlook the inherent complexity of design problems\cite{chakrabarty2024art, wadinambiarachchi2024effects} , often resulting in design fixation and considerable resource waste \cite{palani2022don}. In response, this review investigates DbA within a broader design context, with a focus on AI-driven method, examining its diverse representation, analyzing technologies for comprehensive creative processes and their broad applications, highlighting it's cross-modal and cross-domain knowledge integration and computationable potential, asserting its ethical and technology mediation value in activating human innate capabilities\cite{smits2019values, schecter2025role}, and demonstrating industrial applicability to address these research gaps.
+% %-------------（1）之前类比设计研究的gap，（2）为什么要基于创作过程拆解，（3）我们怎么填补这些gap-------------------------
+%虽然，类比设计的价值通过诸多例证已经展露，但从系统性文献综述的回顾中，我们发现，当前类比设计研究在工业界和学术界呈碎片化态势，不同产业的研究重点关注在创造过程的不同侧面，相关综述包括类比设计理论，单一主题数据源驱动的类比设计，单一计算机技术在类比设计中的应用，以交互方法为中心的类比设计等。这些综述暗含了一些假设，如类比设计的使用场景仅在创意前期阶段或仅支持某些应用场景，类比设计仅能被结构化的数据支撑，以及类比设计的表现形式具有局限。同时，我们关注到创意过程在ai产业界的压缩现象，将创意过程压缩为“输入和输出”的简单过程，而忽略设计问题的复杂性，会导致大量的设计固定及造成资源浪费。因此，本综述在更广泛的设计范畴内研究了基于类比的设计，特别聚焦于人工智能驱动的DbA方法，研究了其多种表现形式，分析了面向全面的创造过程的技术以及其广泛的应用场景，强调其跨模态、跨领域知识整合和计算的的潜力、声明其在激发人类内在能力方面的伦理和技术中介价值，以及其工业适用性，以填补这些研究空白。
+
+
+
+
+Our systematic review of the literature reveals that DbA, as a common cognitive foundation behavior in practice, spans various domains, representing in six forms: \textit{Semantics and Text}, \textit{Visual and Appearance}, \textit{Material and Structure}, \textit{ Function and Attribute}, \textit{Interaction, Workflows, and Multi-sensory experience}, and \textit{Unconventional Contexts}. Supporting four phases of the creative process and their subprocesses, including \textbf{Problem Definition} (vision, inspiration), \textbf{Product Ideation} (ideation, prototype), \textbf{Product Implementation} (fabrication), and \textbf{Product Evaluation} (evaluation, meta). This approach can be applied in creative industries, intelligent manufacturing, education and service industries. For instance, enabling intelligent transfer of similar product principles for new design concepts in creative industries, generating novel mechanical designs and manufacturing processes via data retrieval/mapping in intelligent manufacturing, and facilitating knowledge transfer in education and services industires. Detailed explanations will be provided in Sec.4–6. This study aims to answer three key questions: 
+(1) How and why to fully declare the technical mediating value of Deisgn-by-Analogy to help related industries organically utilize and activate practitioners' inner value? 
+(2) What is the current state of existing AI-driven DbA technologies? How do they specifically support different human-machine collaboration needs across various stages of the create process?
+(3) What general findings and technical guidelines can be provided? Where still require AI support and how?
+
+Findings and responses will be elaborated in Sec.7.
+%--------------------------------我们做了什么，我们回答的研究问题-----------------------------
+%基于系统性文献综述，我们发现基于类比的设计行为作为各行各业的一种共性的认知基础，横跨在各个领域。其表现形式也多种多样，从语义、外观、结构、功能到流程和特殊语境分为六种形式。基于类比设计的技术可以辅助创意过程的4个大阶段7个子阶段，如问题定义（前景、启发），产品构思（构思、原型），产品操作（制作）和产品评估（评价和元）。该方法可以在创意领域、智能制造、教育和服务业中进行部署。如，在创意工业中基于相似产品原理智能迁移得到新的设计构思，在智能制造领域，根据生物知识检索和映射产出新的机械设计方案及制造工艺规划，在教育和服务业中，通过知识迁移辅助各类教学。我们将在第sec3-6详细解释表现形式、创意过程及应用。同时，本研究尝试回应三方面问题：其一,如何充分阐述类比设计的技术中介价值，以帮助相关行业有机利用并激发从业者的内在价值？其二，现有的AI驱动的类比设计技术的现状如何？在设计过程的不同阶段如何具体支持人机协作的不同需求？其三，有哪些通用的发现和技术指导？还有哪些部分需要以及如何使用AI进行支持？我们将在Sec.7解释我们的发现并回答问题。
+The contributions of this work are threefold: 
+(1) We conducted a systematic review and PRISMA selection process\cite{page2021prisma} on technologies, applications, and theoretical articles (N = 1615) in Design-by-Analogy and related fields. After screening and inclusion based on a set of criteria, 86 articles were finally included, which will be detailed in Sec. 3.  
+
+(2) Based on the selected articles, two authors independently performed thematic analysis\cite{clarke2014thematic} to establish classification criteria, covering 6 representations, DbA techniques based on 7 creative processes, and 3 application domains. Relevant discussions were conducted to address the second question above.  
+
+(3) Guided by the summary and findings of the corpus, we provide directions for future work to answer the first and third questions.
+%-------------------------------------本工作的主要贡献是-------------------------------------
+% 本工作的主要贡献是（1）我们对design by analogy及相关领域的技术和应用以及理论文章（n=1615) 进行了系统性综述以及prisma selection流程，并按照一系列标准进行了筛选和纳入，最终纳入了n=86篇文献，将在Sec.3详细描述。（2）根据筛选后的文章两位作者独立进行主题分析，建立分类标准，涵盖6种类比设计的表现形式，面向7个创造过程的类比设计技术，3个应用领域，并进行了相关讨论，以回答上述第二个问题（3）基于对语料库的总结和发现，为未来工作进行指导，回答第一个和第三个问题。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%---------------------------------------DRAFFFFTTTTTTTTTTTTTTTTTTTTTTTTTTT----------------
+
+
+
+% %---------------新的研究机遇是什么---------------
+%新的研究基于在于进行更加细致和合理的拆解人类创造行为，这一认知行为已经在各种工业产业中进行部署和应用，只是不同产业关注的创造行为的阶段不同，人机交互领域（hci）的相关开发和研究工作尚未完整拆解各个领域中的共性问题并加以点对点的研究和辅助。在创造行为被压缩成为输入指令-产出这样间断的逻辑链条时，设计固定的问题则很难通过模型的优化和提示词的优化来进行改善，而设计固定发生在创意中的各个阶段【】【【】【】。解构创造行为成为了一种必要性的工作。人类在创造行为中动用的创造力机制中的一个子机制就是类比设计，市面上已有一些相关的工作如【】将草图类比到实际产出，【】将人的共情类比到新的情境中，【】将服务类比到新的市场中。新的研究应该由各个产业的人员关注该产业中的创造过程的全部阶段，完整地激发产业从业人员的创造力，帮助他们找到在行业中应用自己的经验，从而找到自信心和自我价值，而非通过压缩人机交互的过程，而雄辩式的声称可以取代他们的工作。本文的研究问题则是：现有的人工智能驱动的类比设计技术如何在设计过程的不同阶段（例如，灵感激发、构思与原型制作）支持人机协作的不同需求？· 现有的各个领域是怎么使用analogy这个认知机制进行应用设计的？还有哪些部分需要以及将如何用AI进行支持？
+
+
+
+% %----------我们做了什么------
+%本工作的主要贡献是对（1）这一领域的相关文献从2008年的技术和应用以及理论文章（n=1541)中进行了系统性review，严格执行了prisma selection流程，并按照xxxxxx的标准进行了筛选，排除了1.不服务设计的算法 = 69， 不服务于设计的理论 = 156，不讨论类比设计的文献 = 77，仅验证类比有效性的文献= 91，（2）最终建立分类标准，纳入了n=106篇文献。并进行了总结和讨论，以回答上述问题，（3）我们为未来工作进行指导。
